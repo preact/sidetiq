@@ -21,6 +21,10 @@ module Sidetiq
     def config
       @config ||= OpenStruct.new
     end
+
+    def enabled?
+      !!(Sidekiq.server? && config.enabled)
+    end
   end
 
   configure do |config|
@@ -29,6 +33,7 @@ module Sidetiq
     config.lock_expire = 1000
     config.utc = false
     config.handler_pool_size = nil
+    config.enabled = true
   end
 end
 

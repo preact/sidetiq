@@ -17,5 +17,19 @@ class TestConfig < Sidetiq::TestCase
 
     assert_equal 42, Sidetiq.config.test
   end
+
+  def test_enabled
+    Sidetiq.configure do |config|
+      config.enabled = true
+    end
+    assert Sidetiq.enabled?
+  end
+
+  def test_disabled
+    Sidetiq.configure do |config|
+      config.enabled = false
+    end
+    assert !Sidetiq.enabled?
+  end
 end
 
